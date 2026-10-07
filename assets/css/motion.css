@@ -1,0 +1,686 @@
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  /* Apply elevation to interactive cards on hover-capable devices. */
+  .info-card,
+  .program-card,
+  .trainer-card,
+  .price-card,
+  .gallery-item,
+  .contact-intro,
+  .map-panel,
+  .contact-form-rebuilt,
+  .feature-list article,
+  .metrics > div,
+  .trainer-highlight,
+  .map-card {
+    outline: 1px solid transparent;
+    outline-offset: -1px;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease,
+      outline-color 0.3s ease,
+      filter 0.3s ease;
+  }
+
+  .reveal {
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease,
+      box-shadow 0.3s ease,
+      outline-color 0.3s ease,
+      filter 0.3s ease;
+  }
+
+  /* Enlarge the facility image on hover. */
+  .about-visual img {
+    transition: transform 0.6s ease;
+  }
+
+  .about-visual:hover img {
+    transform: scale(1.04);
+  }
+
+  .info-card:hover,
+  .program-card:hover,
+  .trainer-card:hover,
+  .price-card:not(.featured-price):hover,
+  .gallery-item:hover,
+  .contact-intro:hover,
+  .map-panel:hover,
+  .contact-form-rebuilt:hover,
+  .feature-list article:hover,
+  .metrics > div:hover,
+  .trainer-highlight:hover,
+  .map-card:hover {
+    transform: translateY(-6px);
+    outline-color: var(--red);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Disable nonessential transitions for reduced-motion visitors. */
+  .info-card,
+  .program-card,
+  .trainer-card,
+  .price-card,
+  .gallery-item,
+  .contact-intro,
+  .map-panel,
+  .contact-form-rebuilt,
+  .feature-list article,
+  .metrics > div,
+  .trainer-highlight,
+  .map-card,
+  .about-visual img {
+    transition: none;
+  }
+
+  .about-visual:hover img {
+    transform: none;
+  }
+}
+
+.about {
+  /* Place the facility image behind readable about-section copy. */
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.about .section-heading {
+  position: relative;
+  z-index: 2;
+}
+
+.about-grid {
+  display: block;
+}
+
+.about-copy {
+  position: relative;
+  z-index: 2;
+  width: min(510px, 52%);
+}
+
+.about-visual {
+  position: absolute;
+  z-index: 0;
+  top: -110px;
+  right: -10vw;
+  bottom: -110px;
+  width: 62%;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  background: var(--surface);
+  isolation: isolate;
+}
+
+.about-visual::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      var(--ink),
+      rgba(17, 19, 21, 0.92) 18%,
+      rgba(17, 19, 21, 0.55) 46%,
+      rgba(17, 19, 21, 0.12) 100%
+    ),
+    linear-gradient(0deg, rgba(8, 10, 11, 0.88), transparent 62%);
+  content: "";
+  pointer-events: none;
+}
+
+.about-visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-visual figcaption {
+  position: absolute;
+  z-index: 2;
+  right: 28px;
+  bottom: 28px;
+  left: 28px;
+  display: grid;
+  gap: 10px;
+  color: #fff;
+}
+
+.about-visual figcaption span {
+  color: #ff626b;
+  font:
+    600 11px Oswald,
+    sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.about-visual figcaption strong {
+  font:
+    600 32px/1.05 Oswald,
+    sans-serif;
+  text-transform: uppercase;
+}
+
+.footer-rebuilt {
+  /* Arrange the footer's four content columns. */
+  grid-template-columns: 1.2fr 1fr 0.7fr 0.9fr;
+  align-items: start;
+}
+
+.footer-rebuilt .footer-brand p {
+  max-width: 250px;
+  line-height: 1.6;
+}
+
+.footer-quick-links h2 {
+  margin: 0 0 14px;
+  color: var(--cream);
+  font:
+    600 12px Oswald,
+    sans-serif;
+  text-transform: uppercase;
+}
+
+.footer-quick-links ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-quick-links a {
+  display: inline-block;
+  color: var(--muted);
+  font:
+    12px Oswald,
+    sans-serif;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-quick-links a:hover,
+.footer-quick-links a:focus-visible {
+  color: var(--red);
+  transform: translateX(3px);
+}
+
+@media (max-width: 980px) {
+  .footer-rebuilt {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .about-visual {
+    top: -80px;
+    right: -20px;
+    bottom: -80px;
+    width: 86%;
+  }
+
+  .about-copy {
+    width: 100%;
+  }
+
+  .about-visual figcaption {
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+  }
+
+  .footer-rebuilt {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-rebuilt .footer-brand,
+  .footer-quick-links {
+    justify-items: center;
+  }
+
+  .footer-rebuilt .footer-brand p {
+    margin: 0 auto;
+  }
+
+  .footer-quick-links ul {
+    width: min(300px, 100%);
+    margin: 0 auto;
+    text-align: left;
+  }
+}
+
+.hero-pagination {
+  /* Display the hero carousel's slide indicators. */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 2px;
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  padding: 0;
+  border: 1px solid rgba(245, 242, 237, 0.75);
+  border-radius: 50%;
+  background: rgba(17, 19, 21, 0.6);
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.hero-dot.active {
+  border-color: var(--red);
+  background: var(--red);
+  animation: heroDotPop 0.45s cubic-bezier(0.2, 0.8, 0.25, 1.25);
+}
+
+.hero-dot:focus-visible {
+  outline: 2px solid var(--cream);
+  outline-offset: 3px;
+}
+
+@keyframes heroDotPop {
+  50% {
+    transform: scale(1.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-dot,
+  .hero-dot.active {
+    animation: none;
+    transition: none;
+  }
+}
+
+.reviews {
+  /* Set the background for the member review carousel. */
+  background: var(--surface);
+}
+
+.reviews-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 36px;
+}
+
+.reviews-heading > p {
+  max-width: 360px;
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.review-carousel {
+  position: relative;
+}
+
+.review-stage {
+  position: relative;
+  height: 310px;
+  overflow: hidden;
+}
+
+.review-card {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc((100% - 32px) / 3);
+  min-height: 250px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.9);
+  filter: blur(2px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    filter 0.45s ease,
+    box-shadow 0.3s ease;
+}
+
+.review-card.is-previous,
+.review-card.is-next {
+  z-index: 1;
+  opacity: 0.76;
+  pointer-events: auto;
+  filter: blur(1px);
+}
+
+.review-card.is-previous {
+  transform: translate(calc(-100% - 16px), -50%) scale(0.94);
+  transform-origin: right center;
+}
+
+.review-card.is-next {
+  transform: translate(16px, -50%) scale(0.94);
+  transform-origin: left center;
+}
+
+.review-card.is-active {
+  z-index: 2;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.04);
+  filter: none;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
+  animation: reviewCardPop 0.45s cubic-bezier(0.2, 0.8, 0.25, 1.25);
+}
+
+.review-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.review-control {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--cream);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.review-control:hover,
+.review-control:focus-visible {
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
+}
+
+.review-pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.review-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  padding: 0;
+  border: 1px solid rgba(245, 242, 237, 0.75);
+  border-radius: 50%;
+  background: rgba(17, 19, 21, 0.6);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.review-dot.active {
+  border-color: var(--red);
+  background: var(--red);
+  animation: heroDotPop 0.45s cubic-bezier(0.2, 0.8, 0.25, 1.25);
+}
+
+.review-dot:focus-visible,
+.review-control:focus-visible {
+  outline: 2px solid var(--cream);
+  outline-offset: 3px;
+}
+
+@keyframes reviewCardPop {
+  50% {
+    transform: translate(-50%, -50%) scale(1.09);
+  }
+}
+
+.review-rating {
+  color: #e7ad2f;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.review-card blockquote {
+  flex: 1;
+  margin: 18px 0 24px;
+  color: var(--cream);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.review-member {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.review-avatar {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.review-member p {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  color: var(--cream);
+  font:
+    600 12px Oswald,
+    sans-serif;
+  text-transform: uppercase;
+}
+
+.review-member p span {
+  color: var(--muted);
+  font:
+    10px Poppins,
+    sans-serif;
+  text-transform: none;
+}
+
+.review-form {
+  width: min(760px, 100%);
+  margin: 54px auto 0;
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+}
+
+.review-form-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.review-form-heading .eyebrow {
+  margin-bottom: 8px;
+}
+
+.review-form-heading h3 {
+  margin: 0;
+  color: var(--cream);
+  font: 600 26px Oswald, sans-serif;
+  text-transform: uppercase;
+}
+
+.review-form-heading > p {
+  max-width: 280px;
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.review-form-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.review-form-fields label {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.review-form-fields input,
+.review-form-fields select,
+.review-form-fields textarea {
+  display: block;
+  width: 100%;
+  margin-top: 7px;
+  padding: 12px 13px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--surface-raised);
+  color: var(--cream);
+  font: 13px Poppins, sans-serif;
+}
+
+.review-form-fields select option {
+  background: var(--surface-raised);
+}
+
+.review-form-fields input:focus,
+.review-form-fields select:focus,
+.review-form-fields textarea:focus {
+  border-color: var(--red);
+  outline: 1px solid var(--red);
+}
+
+.review-form-fields textarea {
+  resize: vertical;
+}
+
+.review-comment {
+  grid-column: 1 / -1;
+}
+
+.review-form .button {
+  margin-top: 18px;
+}
+
+.review-form-status {
+  min-height: 22px;
+  margin: 10px 0 0;
+  color: var(--red);
+  font-size: 12px;
+}
+
+html.light-theme .reviews {
+  background: var(--surface);
+}
+
+html.light-theme .review-card {
+  background: var(--surface-raised);
+}
+
+@media (max-width: 760px) {
+  .reviews-heading {
+    display: block;
+  }
+
+  .reviews-heading > p {
+    margin-top: 20px;
+  }
+
+  .review-stage {
+    height: 310px;
+  }
+
+  .review-card {
+    width: 88%;
+    min-height: 250px;
+  }
+
+  .review-card.is-previous,
+  .review-card.is-next {
+    opacity: 0;
+    pointer-events: none;
+    filter: blur(0);
+  }
+
+  .review-form-heading {
+    display: block;
+  }
+
+  .review-form-heading > p {
+    margin-top: 12px;
+  }
+
+  .review-form-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .review-comment {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-card,
+  .review-control,
+  .review-dot,
+  .review-card.is-active,
+  .review-dot.active {
+    animation: none;
+    transition: none;
+  }
+}
+
+.trainer-image {
+  overflow: hidden;
+  filter: none;
+}
+
+.trainer-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  transition: transform 0.45s ease;
+}
+
+.trainer-card:hover .trainer-image img {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trainer-image img {
+    transition: none;
+  }
+}
