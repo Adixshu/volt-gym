@@ -113,6 +113,19 @@
       const payload = Object.fromEntries(formData.entries());
       payload.type = form.dataset.backendForm;
 
+      const contactInputs = [
+        ...form.querySelectorAll('[name="email"], [name="phone"]'),
+      ];
+      if (
+        contactInputs.length > 0 &&
+        contactInputs.every((input) => input.value.trim() === "")
+      ) {
+        if (status)
+          status.textContent =
+            "Enter an email address or phone number so we can contact you.";
+        return;
+      }
+
       if (status) status.textContent = "Sending...";
       if (submitButton) submitButton.disabled = true;
 

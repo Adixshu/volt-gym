@@ -589,6 +589,12 @@
   grid-column: 1 / -1;
 }
 
+.contact-hint {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
 .review-form .button {
   margin-top: 18px;
 }

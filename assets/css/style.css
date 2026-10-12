@@ -170,16 +170,6 @@
   color: #202224;
   text-shadow: none;
 }
-.light-theme .hero:before {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(244, 242, 238, 0.9),
-      rgba(244, 242, 238, 0.5) 38%,
-      rgba(244, 242, 238, 0.12) 75%
-    ),
-    linear-gradient(0deg, #f4f2ee, transparent 25%);
-}
 .light-theme .metrics,
 .light-theme .about,
 .light-theme .trainers,
@@ -715,7 +705,7 @@
   }
 }
 .hero-slider {
-  z-index: 1 !important;
+  z-index: 0 !important;
 }
 .hero-content {
   z-index: 2;
@@ -1183,17 +1173,24 @@ a {
   color: var(--red);
 }
 .hero {
+  position: relative;
+  isolation: isolate;
   background: var(--ink);
 }
-.hero:before {
+.hero::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
   background:
-    linear-gradient(
-      90deg,
-      rgba(17, 19, 21, 0.98),
-      rgba(17, 19, 21, 0.84) 37%,
-      rgba(17, 19, 21, 0.18) 72%
+    radial-gradient(
+      ellipse 64% 64% at 28% 43%,
+      rgba(8, 9, 10, 0.88) 0%,
+      rgba(8, 9, 10, 0.68) 48%,
+      rgba(8, 9, 10, 0) 100%
     ),
-    linear-gradient(0deg, var(--ink), transparent 28%);
+    linear-gradient(90deg, rgba(8, 9, 10, 0.18), transparent 68%);
 }
 .hero-copy {
   color: #d0d0ce;
@@ -1320,6 +1317,39 @@ a {
   box-shadow: 0 16px 35px rgba(0, 0, 0, 0.22);
 }
 
+.developer-admin-link {
+  width: fit-content;
+  min-height: 46px;
+  margin: 34px 0 0 auto;
+  padding: 0 17px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--red);
+  color: var(--cream);
+  font: 600 13px Oswald, sans-serif;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
+}
+.developer-admin-link i:first-child {
+  color: var(--red);
+}
+.developer-admin-link:hover {
+  background: var(--red);
+  color: #fff;
+}
+.developer-admin-link:hover i:first-child {
+  color: #fff;
+}
+@media (max-width: 760px) {
+  .developer-admin-link {
+    margin: 28px 0 0;
+  }
+}
+
 html.light-theme {
   --ink: #ece8e1;
   --surface: #e3ded6;
@@ -1360,18 +1390,19 @@ html.light-theme .nav-actions.open {
 html.light-theme .hero {
   background: #dcd6cd;
 }
-html.light-theme .hero:before {
+html.light-theme .hero::before {
   background:
-    linear-gradient(
-      90deg,
-      rgba(248, 245, 239, 0.96),
-      rgba(248, 245, 239, 0.72) 43%,
-      rgba(248, 245, 239, 0.12) 76%
+    radial-gradient(
+      ellipse 64% 64% at 28% 43%,
+      rgba(8, 9, 10, 0.82) 0%,
+      rgba(8, 9, 10, 0.62) 48%,
+      rgba(8, 9, 10, 0) 100%
     ),
-    linear-gradient(0deg, #e5e0d8, transparent 28%);
+    linear-gradient(90deg, rgba(8, 9, 10, 0.14), transparent 68%);
 }
 html.light-theme .hero-copy {
-  color: #4e5357;
+  color: #fff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.78);
 }
 html.light-theme .hero-control {
   background: rgba(255, 253, 249, 0.78);
@@ -1379,7 +1410,8 @@ html.light-theme .hero-control {
   color: var(--cream);
 }
 html.light-theme .hero-note {
-  color: #60656a;
+  color: #fff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.78);
 }
 html.light-theme .metrics,
 html.light-theme .about,
@@ -2557,5 +2589,46 @@ html.light-theme .developer-profile h3 {
   }
   .developer-profile h3 {
     font-size: 20px;
+  }
+}
+
+html.light-theme .programs .section-heading > .eyebrow,
+html.light-theme .membership .section-heading > .eyebrow {
+  color: var(--red);
+}
+
+.hero-content h1 {
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.78);
+}
+
+html.light-theme .hero-content h1 {
+  color: #fff;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.82);
+}
+
+html.light-theme .hero-content h1 em {
+  color: var(--red);
+}
+
+@media (max-width: 760px) {
+  .hero::before {
+    background:
+      radial-gradient(
+        ellipse 105% 55% at 34% 39%,
+        rgba(8, 9, 10, 0.88) 0%,
+        rgba(8, 9, 10, 0.67) 54%,
+        rgba(8, 9, 10, 0) 100%
+      ),
+      linear-gradient(90deg, rgba(8, 9, 10, 0.14), transparent 88%);
+  }
+  html.light-theme .hero::before {
+    background:
+      radial-gradient(
+        ellipse 105% 55% at 34% 39%,
+        rgba(8, 9, 10, 0.84) 0%,
+        rgba(8, 9, 10, 0.63) 54%,
+        rgba(8, 9, 10, 0) 100%
+      ),
+      linear-gradient(90deg, rgba(8, 9, 10, 0.12), transparent 88%);
   }
 }

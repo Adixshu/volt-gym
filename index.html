@@ -23,7 +23,7 @@
           document.documentElement.classList.add("light-theme");
       } catch (e) {}
     </script>
-    <link rel="stylesheet" href="assets/css/style.css?v=17" />
+    <link rel="stylesheet" href="assets/css/style.css?v=19" />
     <link rel="stylesheet" href="assets/css/motion.css?v=2" />
   </head>
   <body>
@@ -701,6 +701,28 @@
                 required
               />
             </label>
+            <label for="review-email">
+              Email address (optional)
+              <input
+                id="review-email"
+                name="email"
+                type="email"
+                maxlength="254"
+                autocomplete="email"
+                placeholder="you@email.com"
+              />
+            </label>
+            <label for="review-phone">
+              Phone number (optional)
+              <input
+                id="review-phone"
+                name="phone"
+                type="tel"
+                maxlength="32"
+                autocomplete="tel"
+                placeholder="+1 555 010 1234"
+              />
+            </label>
             <label for="review-rating">
               Your rating
               <select id="review-rating" name="rating" required>
@@ -724,6 +746,7 @@
               ></textarea>
             </label>
           </div>
+          <p class="contact-hint">Add an email address or phone number so we can follow up if needed.</p>
           <button class="button button-primary" type="submit">
             Send review <i class="bi bi-arrow-right"></i>
           </button>
@@ -862,14 +885,25 @@
                 placeholder="Your name"
                 required /></label
             ><label for="email"
-              >Email address<input
+              >Email address (optional)<input
                 id="email"
                 name="email"
                 type="email"
+                maxlength="254"
+                autocomplete="email"
                 placeholder="you@email.com"
-                required
             /></label>
           </div>
+          <label for="inquiry-phone"
+            >Phone number (optional)<input
+              id="inquiry-phone"
+              name="phone"
+              type="tel"
+              maxlength="32"
+              autocomplete="tel"
+              placeholder="+1 555 010 1234"
+          /></label>
+          <p class="contact-hint">Add an email address or phone number so we can contact you.</p>
           <label for="goal"
             >What are you working towards?<select id="goal" name="goal">
               <option>Choose an option</option>
@@ -938,6 +972,10 @@
             </div>
           </article>
         </div>
+        <a class="developer-admin-link" href="php/admin.php">
+          <i class="bi bi-shield-lock"></i> Admin login
+          <i class="bi bi-arrow-up-right"></i>
+        </a>
       </section>
     </main>
     <footer class="site-footer footer-rebuilt">

@@ -22,10 +22,30 @@ if (!is_array($data)) {
 
 $type = $data['type'] ?? '';
 $name = is_string($data['name'] ?? null) ? trim($data['name']) : '';
+$email = is_string($data['email'] ?? null) ? trim($data['email']) : '';
+$phone = is_string($data['phone'] ?? null) ? trim($data['phone']) : '';
 $message = is_string($data['message'] ?? null) ? trim($data['message']) : '';
 
 if ($name === '' || strlen($name) > 60) {
     respond(422, ['message' => 'Enter a name no longer than 60 characters.']);
+}
+if ($email === '' && $phone === '') {
+    respond(422, ['message' => 'Enter an email address or phone number so we can contact you.']);
+}
+if ($email !== '' && (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 254)) {
+    respond(422, ['message' => 'Enter a valid email address.']);
+}
+if ($phone !== '') {
+    $phoneDigits = preg_replace('/\D/', '', $phone);
+    if (
+        strlen($phone) > 32
+        || !preg_match('/^\+?[0-9\s().-]+$/', $phone)
+        || $phoneDigits === null
+        || strlen($phoneDigits) < 7
+        || strlen($phoneDigits) > 15
+    ) {
+        respond(422, ['message' => 'Enter a valid phone number.']);
+    }
 }
 
 try {
@@ -33,22 +53,20 @@ try {
     $connection = databaseConnection();
 
     if ($type === 'inquiry') {
-        $email = is_string($data['email'] ?? null) ? trim($data['email']) : '';
         $goal = is_string($data['goal'] ?? null) ? trim($data['goal']) : '';
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 254) {
-            respond(422, ['message' => 'Enter a valid email address.']);
-        }
         if (strlen($goal) > 100 || strlen($message) > 2000) {
             respond(422, ['message' => 'Some enquiry details are too long.']);
         }
 
         $statement = $connection->prepare(
-            'INSERT INTO inquiries (name, email, goal, message) VALUES (:name, :email, :goal, :message)'
+            'INSERT INTO inquiries (name, email, phone, goal, message)
+             VALUES (:name, :email, :phone, :goal, :message)'
         );
         $statement->execute([
             'name' => $name,
-            'email' => $email,
+            'email' => $email !== '' ? $email : null,
+            'phone' => $phone !== '' ? $phone : null,
             'goal' => $goal !== '' && $goal !== 'Choose an option' ? $goal : null,
             'message' => $message !== '' ? $message : null,
         ]);
@@ -66,10 +84,13 @@ try {
         }
 
         $statement = $connection->prepare(
-            'INSERT INTO reviews (name, rating, message) VALUES (:name, :rating, :message)'
+            'INSERT INTO reviews (name, email, phone, rating, message)
+             VALUES (:name, :email, :phone, :rating, :message)'
         );
         $statement->execute([
             'name' => $name,
+            'email' => $email !== '' ? $email : null,
+            'phone' => $phone !== '' ? $phone : null,
             'rating' => $rating,
             'message' => $message,
         ]);
