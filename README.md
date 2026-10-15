@@ -50,22 +50,42 @@ the admin dashboard are unavailable without PHP and MySQL.
 3. Open phpMyAdmin at `http://localhost/phpmyadmin` and import
    [`php/schema.sql`](php/schema.sql).
 4. Visit `http://localhost/Volt_Gym/`.
-5. To create an admin account, run this command in PowerShell:
+5. Create the initial `admin` account on a new database using the masked
+   password prompt below. This bootstrap runs only when the `admins` table is
+   empty; its password is hashed before it is stored and is not hardcoded in
+   the repository.
 
    ```powershell
-   & 'C:\xampp\php\php.exe' 'C:\xampp\htdocs\Volt_Gym\php\create_admin.php' admin
+   $securePassword = Read-Host 'Initial admin password' -AsSecureString
+   $passwordPointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($securePassword)
+   try {
+     $env:VOLT_INITIAL_ADMIN_PASSWORD = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($passwordPointer)
+     & 'C:\xampp\php\php.exe' 'C:\xampp\htdocs\Volt_Gym\php\bootstrap_admin.php'
+   } finally {
+     [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($passwordPointer)
+     Remove-Item Env:VOLT_INITIAL_ADMIN_PASSWORD -ErrorAction SilentlyContinue
+     $securePassword.Dispose()
+   }
    ```
 
-   Follow the prompt to set a password of at least 12 characters, then sign in
-   at `http://localhost/Volt_Gym/php/admin.php`.
+   Enter the initial password when prompted, then sign in at
+   `http://localhost/Volt_Gym/php/admin.php`. Passwords must be at least 12
+   characters.
+
+6. To create additional admin accounts, use the existing CLI tool:
+
+   ```powershell
+   & 'C:\xampp\php\php.exe' 'C:\xampp\htdocs\Volt_Gym\php\create_admin.php' another-admin
+   ```
+
+   Follow its prompts to set and confirm that account's password.
 
 The backend uses the `volt_gym` database and, by default, the local MySQL
 `root` account with a blank password. To use different database credentials,
 set the `VOLT_DB_HOST`, `VOLT_DB_NAME`, `VOLT_DB_USER`, and `VOLT_DB_PASSWORD`
 environment variables on the server.
 
-For database upgrades, backend details, and admin setup, see the
-[PHP backend guide](php/README.md).
+The API endpoint is `php/api.php`.
 
 ## Project structure
 
@@ -77,10 +97,11 @@ For database upgrades, backend details, and admin setup, see the
 │   ├── image/        Logo and profile images
 │   └── js/           Frontend interactions
 ├── php/
-│   ├── README.md     Backend and XAMPP setup guide
 │   ├── admin.php     Admin dashboard
 │   ├── api.php       Form submission API
+│   ├── bootstrap_admin.php  One-time initial admin setup
 │   ├── config.php    Database configuration
+│   ├── create_admin.php  Add admin accounts
 │   └── schema.sql    Database schema
 ├── .github/
 │   └── workflows/    GitHub Pages deployment workflow
