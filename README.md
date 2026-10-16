@@ -89,6 +89,14 @@ The API endpoint is `php/api.php`.
 
 ## Project structure
 
+The page markup lives in `index.html`; its presentation is split between the
+main component stylesheet, motion-specific styles, and the JavaScript
+interactions. The PHP files contain the API, shared database setup, and admin
+tools, while `schema.sql` defines the tables used by the backend. Source files
+use short section comments to make these responsibilities easier to scan;
+binary media and the vendored minified Bootstrap stylesheet are intentionally
+left unmodified.
+
 ```text
 .
 ├── assets/

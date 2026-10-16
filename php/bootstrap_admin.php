@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+// This one-time bootstrap must only be run from the command line.
 if (PHP_SAPI !== 'cli') {
     http_response_code(404);
     exit;
@@ -14,6 +15,7 @@ if ($password === false || strlen($password) < 12) {
 
 require_once __DIR__ . '/config.php';
 
+// Create the initial account only when no administrator exists yet.
 try {
     $connection = databaseConnection();
     if ($connection->query('SELECT 1 FROM admins LIMIT 1')->fetchColumn()) {

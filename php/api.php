@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
 
+// JSON endpoint for public enquiry and member-review submissions.
 header('Content-Type: application/json; charset=utf-8');
 
+// Send a consistent JSON response and stop processing the request.
 function respond(int $status, array $body): never
 {
     http_response_code($status);
@@ -20,6 +22,7 @@ if (!is_array($data)) {
     respond(400, ['message' => 'The submitted data could not be read.']);
 }
 
+// Normalize shared contact fields before validating the selected form type.
 $type = $data['type'] ?? '';
 $name = is_string($data['name'] ?? null) ? trim($data['name']) : '';
 $email = is_string($data['email'] ?? null) ? trim($data['email']) : '';
@@ -52,6 +55,7 @@ try {
     require_once __DIR__ . '/config.php';
     $connection = databaseConnection();
 
+    // Save a prospective member's visit request.
     if ($type === 'inquiry') {
         $goal = is_string($data['goal'] ?? null) ? trim($data['goal']) : '';
 
@@ -74,6 +78,7 @@ try {
         respond(201, ['message' => 'Thanks. Your visit request has been sent.']);
     }
 
+    // Save a review after validating its rating and message.
     if ($type === 'review') {
         $rating = filter_var($data['rating'] ?? null, FILTER_VALIDATE_INT);
         if ($rating === false || $rating < 1 || $rating > 5) {

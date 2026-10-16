@@ -1,3 +1,4 @@
+/* Site-specific overrides and component styles; Bootstrap remains unmodified. */
 .hero-content:before {
   display: none !important;
 }
@@ -218,6 +219,8 @@
     right: 16px;
   }
 }
+
+/* Featured photography, theme controls, and gallery grid adjustments. */
 .hero-slide:nth-child(4) {
   background-image: url("https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1800&q=85");
 }
@@ -319,6 +322,8 @@
   background: #17191a;
   color: #f5f2ed;
 }
+
+/* Contact panel and form layout. */
 .contact-rebuilt {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -555,6 +560,8 @@
     justify-items: start;
   }
 }
+
+/* Membership plan cards and responsive plan layout. */
 .membership {
   background: #e9e5de;
   color: #111;
@@ -687,6 +694,8 @@
     transform: none;
   }
 }
+
+/* Hero carousel positioning and vision statement cards. */
 .hero-slider {
   inset: 0 !important;
 }
@@ -795,6 +804,8 @@
   color: #fff;
   margin-right: 9px;
 }
+
+/* Facility gallery cards and image treatments. */
 .gallery {
   background: #0d0e0f;
 }
@@ -870,6 +881,8 @@
 .contact-form textarea:focus {
   border-color: var(--red);
 }
+
+/* Footer content and location card. */
 .site-footer {
   grid-template-columns: 1fr 1.2fr 1fr;
   align-items: center;

@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+// Reuse one PDO connection configured from the server environment.
 function databaseConnection(): PDO
 {
     static $connection = null;

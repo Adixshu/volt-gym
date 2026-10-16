@@ -1,4 +1,5 @@
 (() => {
+  // Shared motion preference and navigation state.
   // Add pointer and keyboard emphasis to the brand mark.
   const brand = document.querySelector(".logo");
   // Toggle the mobile navigation and expose its expanded state.
@@ -87,7 +88,7 @@
       .querySelectorAll(".reveal")
       .forEach((item) => item.classList.add("visible"));
 
-  // Switch the class schedule panel to match the selected day tab.
+  // Schedule tabs reveal the matching class list.
   document.querySelectorAll(".day-tab").forEach((tab) =>
     tab.addEventListener("click", () => {
       document
@@ -103,7 +104,7 @@
     }),
   );
 
-  // Send form submissions to the PHP API and report its actual response.
+  // Public forms submit to the PHP API and display its response.
   document.querySelectorAll("[data-backend-form]").forEach((form) => {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -150,6 +151,7 @@
     });
   });
 
+  // Hero carousel state and controls.
   const slides = document.querySelectorAll(".hero-slide");
   const previousButton = document.querySelector(".hero-prev");
   const nextButton = document.querySelector(".hero-next");
@@ -225,6 +227,7 @@
     startSlider();
   }
 
+  // Member review carousel state and controls.
   const reviewCarousel = document.querySelector(".review-carousel");
   const reviewStage = reviewCarousel?.querySelector(".review-stage");
   const reviewCards = [
@@ -313,6 +316,7 @@
     startReviewAutoplay();
   }
 
+  // Gallery lightbox state, navigation, and keyboard shortcuts.
   const galleryItems = [...document.querySelectorAll(".gallery-item")];
   const lightbox = document.querySelector(".gallery-lightbox");
   const lightboxImage = document.querySelector(".lightbox-image");

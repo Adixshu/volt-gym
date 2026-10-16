@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+// Harden the private dashboard response and its session cookie.
 $isHttps = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
 header('Cache-Control: no-store, private');
 header('X-Content-Type-Options: nosniff');
@@ -16,6 +17,7 @@ session_start();
 
 require_once __DIR__ . '/config.php';
 
+// Escape database and session values before rendering them into HTML.
 function escape(string $value): string
 {
     return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
@@ -31,6 +33,7 @@ if (!isset($_SESSION['admin_csrf'])) {
     $_SESSION['admin_csrf'] = bin2hex(random_bytes(32));
 }
 
+// Handle sign-in, sign-out, and inbox read-status actions.
 $errorMessage = '';
 $isAuthenticated = isset($_SESSION['admin_id'], $_SESSION['admin_username']);
 
@@ -107,6 +110,7 @@ $reviewSubmissions = [];
 $inquirySubmissions = [];
 $dashboardError = $errorMessage;
 
+// Load and sort the inbox only for an authenticated dashboard session.
 if ($isAuthenticated && $errorMessage === '') {
     try {
         $connection = databaseConnection();
@@ -139,6 +143,7 @@ if ($isAuthenticated && $errorMessage === '') {
 }
 
 $csrfToken = escape($_SESSION['admin_csrf']);
+// Apply the saved site theme before the dashboard's stylesheet is displayed.
 $themeScript = <<<'HTML'
 <script>
   try {
@@ -167,6 +172,7 @@ HTML;
     <link rel="stylesheet" href="../assets/css/admin.css?v=3" />
   </head>
   <body>
+    <!-- Shared dashboard header and account actions. -->
     <header class="admin-header">
       <a class="brand" href="../index.html" aria-label="Volt Gym home">
         <span class="brand-mark"><i class="bi bi-lightning-charge-fill"></i></span>
@@ -189,6 +195,7 @@ HTML;
     </header>
 
     <main class="<?= $isAuthenticated ? 'dashboard' : 'login-layout' ?>">
+      <!-- The sign-in form is shown until an administrator is authenticated. -->
       <?php if (!$isAuthenticated): ?>
         <section class="login-card" aria-labelledby="login-title">
           <p class="eyebrow"><span></span> VOLT GYM · STAFF ACCESS</p>
@@ -224,6 +231,7 @@ HTML;
           <a class="login-back" href="../index.html">← Back to Volt Gym</a>
         </section>
       <?php else: ?>
+        <!-- Authenticated inbox overview and submission groups. -->
         <section class="dashboard-heading">
           <div>
             <p class="eyebrow"><span></span> MEMBER VOICE</p>

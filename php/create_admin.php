@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+// Admin account management is intentionally restricted to the command line.
 if (PHP_SAPI !== 'cli') {
     http_response_code(404);
     exit;
@@ -27,6 +28,7 @@ if (!hash_equals($password, $confirmation)) {
     exit(1);
 }
 
+// Store only a password hash; never persist the supplied password itself.
 require_once __DIR__ . '/config.php';
 
 try {

@@ -1,9 +1,11 @@
+-- Create the application database with a Unicode-safe default collation.
 CREATE DATABASE IF NOT EXISTS volt_gym
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
 USE volt_gym;
 
+-- Store prospective member visit requests.
 CREATE TABLE IF NOT EXISTS inquiries (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(60) NOT NULL,
@@ -15,6 +17,7 @@ CREATE TABLE IF NOT EXISTS inquiries (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
+-- Store member ratings and written feedback.
 CREATE TABLE IF NOT EXISTS reviews (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(60) NOT NULL,
@@ -27,6 +30,7 @@ CREATE TABLE IF NOT EXISTS reviews (
   CONSTRAINT reviews_rating_range CHECK (rating BETWEEN 1 AND 5)
 ) ENGINE=InnoDB;
 
+-- Store dashboard login names and password hashes.
 CREATE TABLE IF NOT EXISTS admins (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   username VARCHAR(60) NOT NULL,
@@ -36,6 +40,7 @@ CREATE TABLE IF NOT EXISTS admins (
   UNIQUE KEY admins_username_unique (username)
 ) ENGINE=InnoDB;
 
+-- Track whether each review or enquiry has been read in the dashboard.
 CREATE TABLE IF NOT EXISTS admin_read_status (
   submission_type ENUM('review', 'inquiry') NOT NULL,
   submission_id BIGINT UNSIGNED NOT NULL,

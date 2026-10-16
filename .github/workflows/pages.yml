@@ -1,3 +1,4 @@
+# Publish the static website to GitHub Pages after pushes to main or a manual run.
 name: Deploy site to GitHub Pages
 
 on:
@@ -21,10 +22,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      # Prepare the repository and configure the GitHub Pages deployment.
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+      # Upload the static site and publish it to the configured Pages environment.
       - name: Upload site files
         uses: actions/upload-pages-artifact@v3
         with:

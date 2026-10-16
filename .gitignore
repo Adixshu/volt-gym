@@ -1,7 +1,9 @@
+# Local editor settings and environment-specific secrets.
 .vscode/
 .env
 .env.*
 !.env.example
+# Logs, operating-system metadata, and generated local artifacts.
 *.log
 Thumbs.db
 .DS_Store

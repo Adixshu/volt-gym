@@ -1,3 +1,4 @@
+/* Shared admin color tokens and light/dark theme variants. */
 :root {
   color-scheme: dark;
   --admin-bg: #101214;
@@ -26,6 +27,7 @@ html.light-theme {
   box-sizing: border-box;
 }
 
+/* Page reset, shared links, and dashboard header. */
 body {
   min-height: 100vh;
   margin: 0;
@@ -118,6 +120,8 @@ a {
 .logout-form {
   margin: 0;
 }
+
+/* Staff sign-in layout and form controls. */
 
 .logout-button {
   padding: 8px 0 8px 14px;
@@ -247,6 +251,7 @@ h1 em {
   line-height: 1.6;
 }
 
+/* Dashboard heading and submission summary cards. */
 .dashboard {
   width: min(100% - 40px, 1100px);
   margin: 0 auto;
@@ -327,6 +332,7 @@ h1 em {
   font-size: 12px;
 }
 
+/* Collapsible inbox groups and individual submission cards. */
 .inbox-section {
   margin-top: 48px;
 }

@@ -1,3 +1,4 @@
+/* Motion enhancements are isolated from the structural site stylesheet. */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   /* Apply elevation to interactive cards on hover-capable devices. */
   .info-card,
@@ -80,6 +81,7 @@
   }
 }
 
+/* Facility imagery and the responsive footer layout. */
 .about {
   /* Place the facility image behind readable about-section copy. */
   position: relative;
@@ -261,6 +263,7 @@
   }
 }
 
+/* Carousel pagination and review-card presentation. */
 .hero-pagination {
   /* Display the hero carousel's slide indicators. */
   display: flex;
