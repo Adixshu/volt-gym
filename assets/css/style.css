@@ -1330,37 +1330,30 @@ a {
   box-shadow: 0 16px 35px rgba(0, 0, 0, 0.22);
 }
 
-.developer-admin-link {
-  width: fit-content;
-  min-height: 46px;
-  margin: 34px 0 0 auto;
-  padding: 0 17px;
-  display: flex;
+.admin-login-link {
+  min-width: 36px;
+  height: 36px;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  border: 1px solid var(--red);
+  justify-content: center;
+  gap: 6px;
   color: var(--cream);
-  font: 600 13px Oswald, sans-serif;
-  letter-spacing: 0.7px;
+  font: 600 11px Oswald, sans-serif;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
-  transition:
-    color 0.25s ease,
-    background 0.25s ease;
+  text-decoration: none;
+  transition: color 0.25s ease;
 }
-.developer-admin-link i:first-child {
+.admin-login-link i {
+  font-size: 18px;
+}
+.admin-login-link:hover,
+.admin-login-link:focus-visible {
   color: var(--red);
 }
-.developer-admin-link:hover {
-  background: var(--red);
-  color: #fff;
-}
-.developer-admin-link:hover i:first-child {
-  color: #fff;
-}
-@media (max-width: 760px) {
-  .developer-admin-link {
-    margin: 28px 0 0;
-  }
+.admin-login-link:focus-visible {
+  outline: 2px solid var(--cream);
+  outline-offset: 3px;
 }
 
 html.light-theme {

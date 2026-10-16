@@ -24,7 +24,7 @@
           document.documentElement.classList.add("light-theme");
       } catch (e) {}
     </script>
-    <link rel="stylesheet" href="assets/css/style.css?v=22" />
+    <link rel="stylesheet" href="assets/css/style.css?v=23" />
     <link rel="stylesheet" href="assets/css/motion.css?v=2" />
   </head>
   <body>
@@ -66,9 +66,18 @@
           >
             <!-- Persistent color-theme toggle. -->
             <i class="bi bi-sun-fill"></i></button
-          ><a href="#membership" class="join-btn"
-            >Start training <i class="bi bi-arrow-up-right"></i
-          ></a>
+          ><a href="#membership" class="join-btn">
+            Start training <i class="bi bi-arrow-up-right"></i>
+          </a>
+          <a
+            class="admin-login-link"
+            href="php/admin.php"
+            aria-label="Admin login"
+            title="Admin login"
+          >
+            <i class="bi bi-shield-lock" aria-hidden="true"></i>
+            <span>Admin</span>
+          </a>
         </div>
       </nav>
     </header>
@@ -976,10 +985,6 @@
             </div>
           </article>
         </div>
-        <a class="developer-admin-link" href="php/admin.php">
-          <i class="bi bi-shield-lock"></i> Admin login
-          <i class="bi bi-arrow-up-right"></i>
-        </a>
       </section>
     </main>
     <!-- Gym identity, useful links, social channels, and opening hours. -->
